@@ -16,7 +16,7 @@ class PlantDTO
         $this->name = $plant->name;
         $this->description = $plant->description;
         $this->price = (float) $plant->price;
-        $this->images = json_decode($plant->images, true) ?? [];
+        $this->images = $plant->images ?? [];
         $this->slug = $plant->slug;
         $this->categoryName = $plant->category->category_name;
     }

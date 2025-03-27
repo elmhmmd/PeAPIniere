@@ -30,4 +30,37 @@ class PlantController extends Controller
 
         return response()->json($plantDTO);
     }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+            'images' => 'nullable|array',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+        $plant = $this->plantDAO->create($request->all());
+        return response()->json(PlantDTO::fromModel($plant)->toArray(), 201);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $request->validate([
+            'name' => 'string',
+            'description' => 'string',
+            'price' => 'numeric|min:0',
+            'images' => 'nullable|array',
+            'category_id' => 'exists:categories,id',
+        ]);
+        $plant = $this->plantDAO->update($id, $request->all());
+        return response()->json(PlantDTO::fromModel($plant)->toArray());
+    }
+
+    public function destroy(int $id)
+    
+    {
+        $this->plantDAO->delete($id);
+        return response()->json(['message' => 'Plant deleted']);
+    }
+
 }
