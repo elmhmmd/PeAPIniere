@@ -1,0 +1,102 @@
+c:/xampp/htdocs/PeAPIniere/
+├── .editorconfig
+├─] .env (ignored)
+├── .env.example
+├── .gitattributes
+├── .gitignore
+├── app/
+│   ├── Http/
+│   │   └── Controllers/
+│   │       ├── AuthController.php
+│   │       └── Controller.php
+│   ├── Models/
+│   │   └── User.php
+│   └── Providers/
+│       └── AppServiceProvider.php
+├── artisan
+├── bootstrap/
+│   ├── app.php
+│   ├── cache/
+│   │   ├── .gitignore
+│   │   ├─] packages.php (ignored)
+│   │   └─] services.php (ignored)
+│   └── providers.php
+├── composer.json
+├── composer.lock
+├── config/
+│   ├── app.php
+│   ├── auth.php
+│   ├── cache.php
+│   ├── database.php
+│   ├── filesystems.php
+│   ├── jwt/
+│   │   ├── private.pem
+│   │   └── public.pem
+│   ├── jwt.php
+│   ├── logging.php
+│   ├── mail.php
+│   ├── queue.php
+│   ├── sanctum.php
+│   ├── services.php
+│   └── session.php
+├── database/
+│   ├── .gitignore
+│   ├─] database.sqlite (ignored)
+│   ├── factories/
+│   │   └── UserFactory.php
+│   ├── migrations/
+│   │   ├── 0001_01_01_000000_create_users_table.php
+│   │   ├── 0001_01_01_000001_create_cache_table.php
+│   │   ├── 0001_01_01_000002_create_jobs_table.php
+│   │   └── 2025_03_19_135623_create_personal_access_tokens_table.php
+│   └── seeders/
+│       └── DatabaseSeeder.php
+├── Diagrammes/
+│   ├── class.png
+│   └── use case.png
+├── package.json
+├── phpunit.xml
+├── public/
+│   ├── .htaccess
+│   ├── favicon.ico
+│   ├── index.php
+│   └── robots.txt
+├── README.md
+├── resources/
+│   ├── css/
+│   │   └── app.css
+│   ├── js/
+│   │   ├── app.js
+│   │   └── bootstrap.js
+│   └── views/
+│       └── welcome.blade.php
+├── routes/
+│   ├── api.php
+│   ├── console.php
+│   └── web.php
+├── storage/
+│   ├── app/
+│   │   ├── .gitignore
+│   │   ├─] private/ (ignored)
+│   │   └─] public/ (ignored)
+│   ├── framework/
+│   │   ├── .gitignore
+│   │   ├── cache/
+│   │   │   ├── .gitignore
+│   │   │   └─] data/ (ignored)
+│   │   ├── sessions/
+│   │   │   └── .gitignore
+│   │   ├── testing/
+│   │   │   └── .gitignore
+│   │   └── views/
+│   │       └── .gitignore
+│   └── logs/
+│       └── .gitignore
+├── tests/
+│   ├── Feature/
+│   │   └── ExampleTest.php
+│   ├── TestCase.php
+│   └── Unit/
+│       └── ExampleTest.php
+├─] vendor/ (ignored)
+└── vite.config.js
