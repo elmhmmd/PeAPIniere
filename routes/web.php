@@ -7,10 +7,16 @@ Route::get('/', function () {
 });
 
 
-Route::get('/swagger', function () {
-    return view('swagger');
+Route::get('/swagger-ui', function () {
+    return view('index');
 });
 
-Route::get('/swagger/swagger.json', function () {
-    return response()->file(public_path('swagger/swagger.json'));
+Route::get('/docs/paritapi', function () {
+    $filePath = storage_path('api-docs/api-docs.json');
+    if (!file_exists($filePath)) {
+        abort(404, 'Swagger file not found');
+    }
+    return response()->file($filePath, [
+        'Content-Type' => 'application/json',
+    ]);
 });

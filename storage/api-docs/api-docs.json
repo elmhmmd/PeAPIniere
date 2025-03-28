@@ -1,0 +1,235 @@
+openapi: 3.0.0
+info:
+  title: PeAPIniere API
+  version: 1.0.0
+  description: API for managing plants, orders, and categories
+  contact:
+    email: support@example.com
+servers:
+  - url: http://localhost:8000
+    description: Local server
+tags:
+  - name: Authentication
+    description: User authentication endpoints
+  - name: Categories
+    description: Category management for admins
+  - name: Plants
+    description: Plant management and retrieval
+paths:
+  /api/auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login user and return JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: admin@example.com
+                password:
+                  type: string
+                  example: password123
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLCJhbG...
+                  token_type:
+                    type: string
+                    example: bearer
+                  expires_in:
+                    type: integer
+                    example: 3600
+        '401':
+          description: Unauthorized
+  /api/admin/categories:
+    post:
+      tags:
+        - Categories
+      summary: Create a new category
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_name:
+                  type: string
+                  example: Herbes
+              required:
+                - category_name
+      responses:
+        '201':
+          description: Category created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  category_name:
+                    type: string
+                    example: Herbes
+                  created_at:
+                    type: string
+                    example: 2025-03-27T12:00:00Z
+                  updated_at:
+                    type: string
+                    example: 2025-03-27T12:00:00Z
+        '403':
+          description: Forbidden
+        '422':
+          description: Validation error
+  /api/admin/categories/{id}:
+    put:
+      tags:
+        - Categories
+      summary: Update a category
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_name:
+                  type: string
+                  example: Herbes Aromatiques
+              required:
+                - category_name
+      responses:
+        '200':
+          description: Category updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  category_name:
+                    type: string
+                    example: Herbes Aromatiques
+                  created_at:
+                    type: string
+                    example: 2025-03-27T12:00:00Z
+                  updated_at:
+                    type: string
+                    example: 2025-03-27T12:01:00Z
+        '403':
+          description: Forbidden
+        '404':
+          description: Category not found
+        '422':
+          description: Validation error
+    delete:
+      tags:
+        - Categories
+      summary: Delete a category
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Category deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Category deleted
+        '403':
+          description: Forbidden
+        '404':
+          description: Category not found
+  /api/plants/{slug}:
+    get:
+      tags:
+        - Plants
+      summary: Retrieve a plant by slug
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            example: basilic-aromatique
+      responses:
+        '200':
+          description: Plant details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: Basilic Aromatique
+                  slug:
+                    type: string
+                    example: basilic-aromatique
+                  description:
+                    type: string
+                    example: Herbe savoureuse
+                  price:
+                    type: number
+                    format: float
+                    example: 2.99
+                  images:
+                    type: array
+                    items:
+                      type: string
+                      example: url
+                  category_id:
+                    type: integer
+                    example: 1
+        '403':
+          description: Forbidden
+        '404':
+          description: Plant not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Enter JWT token in the format 'Bearer {token}'
