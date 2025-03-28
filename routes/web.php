@@ -6,6 +6,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/swagger', function () {
-    return response()->file(public_path('swagger/index.html'));
+    return view('swagger');
+});
+
+Route::get('/swagger/swagger.json', function () {
+    return response()->file(public_path('swagger/swagger.json'));
 });

@@ -5,9 +5,15 @@
  *     @OA\Info(
  *         title="PeAPIniere API",
  *         version="1.0.0",
- *         description="API for managing plants, orders, and categories"
+ *         description="API for managing plants, orders, and categories",
+ *         @OA\Contact(
+ *             email="support@example.com"
+ *         )
  *     ),
- *     @OA\Server(url="http://localhost:8000", description="Local server")
+ *     @OA\Server(
+ *         url="http://localhost:8000",
+ *         description="Local server"
+ *     )
  * )
  */
 
